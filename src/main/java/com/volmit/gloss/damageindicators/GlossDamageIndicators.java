@@ -11,23 +11,21 @@ import org.bukkit.util.Vector;
 
 import com.volmit.gloss.api.GLOSS;
 import com.volmit.gloss.api.intent.TemporaryDescriptor;
-import com.volmit.volume.bukkit.VolumePlugin;
-import com.volmit.volume.bukkit.command.CommandTag;
-import com.volmit.volume.bukkit.pawn.Async;
-import com.volmit.volume.bukkit.pawn.Start;
-import com.volmit.volume.bukkit.task.A;
-import com.volmit.volume.bukkit.util.data.Edgy;
-import com.volmit.volume.math.M;
+import com.volmit.gloss.api.wrapper.GlossAPI;
 
-@CommandTag("&8[&5GCB&8]:&7 ")
-public class GlossDamageIndicators extends VolumePlugin
+import primal.bukkit.config.Configurator;
+import primal.bukkit.plugin.PrimalPlugin;
+import primal.bukkit.sched.A;
+import primal.compute.math.M;
+
+public class GlossDamageIndicators extends PrimalPlugin
 {
-	@Start
-	public void loadConf()
+	@Override
+	public void start()
 	{
 		try
 		{
-			Config.read();
+			Configurator.BUKKIT.load(Config.class, GLOSS.getConfigLocation(instance));
 		}
 
 		catch(Exception e)
@@ -53,12 +51,10 @@ public class GlossDamageIndicators extends VolumePlugin
 		};
 	}
 
-	@Edgy
-	@Async
 	private void damaged(double amt, Entity e)
 	{
 		Location initial = e.getLocation().clone().add(new Vector(0, 0.7, 0));
-		TemporaryDescriptor d = GLOSS.getSourceLibrary().createTemporaryDescriptor("dmg-" + e.getUniqueId() + M.ms() + UUID.randomUUID().toString().split("-")[1], initial, Config.maxTimeAlive);
+		TemporaryDescriptor d = GlossAPI.getInstance().createTemporaryHologram("dmg-" + e.getUniqueId() + M.ms() + UUID.randomUUID().toString().split("-")[1], initial, Config.maxTimeAlive);
 		d.addLine(Config.indicatorPrefix + ((int) (amt)));
 		Vector mot = Vector.getRandom().subtract(Vector.getRandom()).multiply(Config.randomThrowForce);
 		mot.setY(Config.initialThrowUpForce);
@@ -72,5 +68,17 @@ public class GlossDamageIndicators extends VolumePlugin
 
 		d.setLocation(initial);
 		GLOSS.getSourceLibrary().register(d);
+	}
+
+	@Override
+	public void stop()
+	{
+
+	}
+
+	@Override
+	public String getTag(String subTag)
+	{
+		return "";
 	}
 }
