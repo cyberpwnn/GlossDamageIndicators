@@ -6,6 +6,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.util.Vector;
 
@@ -18,14 +19,16 @@ import primal.bukkit.plugin.PrimalPlugin;
 import primal.bukkit.sched.A;
 import primal.compute.math.M;
 
-public class GlossDamageIndicators extends PrimalPlugin
+public class GlossDamageIndicators extends PrimalPlugin implements Listener
 {
 	@Override
 	public void start()
 	{
+		registerListener(this);
+
 		try
 		{
-			Configurator.BUKKIT.load(Config.class, GLOSS.getConfigLocation(instance));
+			Configurator.BUKKIT.load(Config.class, GLOSS.getConfigLocation(this));
 		}
 
 		catch(Exception e)
