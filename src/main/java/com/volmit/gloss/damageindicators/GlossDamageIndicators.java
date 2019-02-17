@@ -59,6 +59,7 @@ public class GlossDamageIndicators extends PrimalPlugin implements Listener
 		Location initial = e.getLocation().clone().add(new Vector(0, 0.7, 0));
 		TemporaryDescriptor d = GlossAPI.getInstance().createTemporaryHologram("dmg-" + e.getUniqueId() + M.ms() + UUID.randomUUID().toString().split("-")[1], initial, Config.maxTimeAlive);
 		d.addLine(Config.indicatorPrefix + ((int) (amt)));
+		d.setEmissiveLevel(0);
 		Vector mot = Vector.getRandom().subtract(Vector.getRandom()).multiply(Config.randomThrowForce);
 		mot.setY(Config.initialThrowUpForce);
 
