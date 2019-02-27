@@ -1,6 +1,6 @@
 package com.volmit.gloss.damageindicators;
 
-import primal.bukkit.config.Key;
+import mortar.api.config.Key;
 
 public class Config
 {
