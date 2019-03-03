@@ -16,6 +16,9 @@ public class Config
 	@Key("damage-indicators.max-ms-alive")
 	public static int maxTimeAlive = 3000;
 
-	@Key("damage-indicators.indicator-prefix")
-	public static String indicatorPrefix = "&c&l";
+	@Key("damage-indicators.damage-indicator-prefix")
+	public static String dmgindicatorPrefix = "&c&l";
+
+	@Key("damage-indicators.heal-indicator-prefix")
+	public static String hpindicatorPrefix = "&a&l";
 }
