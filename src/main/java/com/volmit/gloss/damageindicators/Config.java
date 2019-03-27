@@ -7,6 +7,9 @@ public class Config
 	@Key("damage-indicators.motion.random-throw-force")
 	public static double randomThrowForce = 0.08;
 
+	@Key("damage-indicators.max-indicators-per-second")
+	public static int maxPerSecond = 10;
+
 	@Key("damage-indicators.motion.initial-up-force")
 	public static double initialThrowUpForce = 0.13;
 
